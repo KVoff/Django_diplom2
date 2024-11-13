@@ -30,10 +30,3 @@ class Product(models.Model):
             "image_url": self.image.url if self.image else None,
         }
 
-    # # проверка и обновление товара для магазина
-    # def reduce_stock(self, quantity):
-    #     if quantity > self.count:
-    #         return False
-    #     self.count -= quantity
-    #     self.save()
-    #     return True
