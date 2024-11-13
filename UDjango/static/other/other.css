@@ -1,0 +1,36 @@
+/* Стили футера */
+footer {
+    display: flex;
+    flex-direction: column; /* Элементы внутри футера будут по вертикали */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background-color: transparent;
+    border-top: 1px solid #dee2e6;
+    margin-top: auto; /* Это заставит футер быть внизу */
+}
+
+footer p {
+    margin: 0; /* Убираем отступы вокруг абзаца */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+.footer-button {
+
+    color: #4c9daf; /* Цвет текста */
+    background-color: transparent; /* Прозрачный фон */
+    padding: 10px 20px; /* Отступы */
+    text-decoration: none; /* Убирает подчеркивание */
+    border-radius: 5px; /* Скругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    /* border: 2px solid #007bff; /* Граница с цветом текста */
+}
+
+.footer-button:hover {
+    color: #127a8c; /* Цвет текста при наведении */
+    background-color: transparent; /* Фон остается прозрачным */
+    /* border-color: #0056b3; /* Граница также меняется при наведении */
+}
+

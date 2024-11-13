@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+    <link rel="stylesheet" href="{% static 'order/order.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+<body>
+<div class="form-container">
+    <h1>Создание заказа</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ order_form.non_field_errors }}
+
+        <h3>Покупатель</h3>
+        {{ order_form.buyer }}
+        {{ order_form.buyer.errors }}
+
+        <h3>Добавление товаров</h3>
+
+        <div id="order-items">
+            {% for order_item in order_items %}
+
+                <label for="id_product_id_{{ forloop.counter }}">Товар:</label>
+                <select name="product_id"
+                        id="id_product_id_{{ forloop.counter }}"
+                        onchange="updateTotalPrice()">
+                    {% for product in products %}
+                        <option value="{{ product.id }}"
+                                data-price="{{ product.price }}"
+                                {% if order_item.product_id == product.id %}selected{% endif %}>
+                            {{ product.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <label for="id_quantity_{{ forloop.counter }}">Количество:</label>
+                <input type="number" name="quantity"
+                       id="id_quantity_{{ forloop.counter }}" min="1"
+                       value="{{ order_item.quantity }}"
+                       onchange="updateTotalPrice()" required>
+
+                {% if order_item.product_id in insufficient_products %}
+                    <span class="error-message">Недостаточно товара!</span>
+                {% endif %}
+
+                <button  type="button" onclick="removeOrderItem
+                (this)">
+                    Удалить
+                </button>
+
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-order-item">Добавить товар</button>
+
+        <div class="total-price">
+            <h3>Стоимость заказа: <span id="total-price">0.00</span></h3>
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %}
+                        class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <button type="submit">Создать заказ</button>
+    </form>
+
+    <a href="{% url 'order_list' %}" class="back-button">Назад к заказам</a>
+</div>
+
+<script>
+    let orderItemIndex = {{ order_items|length }};
+
+    document.getElementById('add-order-item').addEventListener('click', function () {
+        addOrderItem();
+    });
+
+    function addOrderItem() {
+        const orderItemsDiv = document.getElementById('order-items');
+        const newOrderItemDiv = document.createElement('div');
+        newOrderItemDiv.className = 'order-item';
+        newOrderItemDiv.innerHTML = `
+                <label for="id_product_id_${orderItemIndex}">Product:</label>
+                <select name="product_id" id="id_product_id_${orderItemIndex}" onchange="updateTotalPrice()">
+                    {% for product in products %}
+                        <option value="{{ product.id }}" data-price="
+            {{ product.price }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="id_quantity_${orderItemIndex}">Quantity:</label>
+                <input type="number" name="quantity" id="id_quantity_${orderItemIndex}" min="1" value="1" onchange="updateTotalPrice()" required>
+
+                <button type="button" onclick="removeOrderItem(this)">Удалить</button>
+            `;
+        orderItemsDiv.appendChild(newOrderItemDiv);
+        orderItemIndex++;
+    }
+
+    function removeOrderItem(button) {
+        const orderItemDiv = button.parentElement;
+        orderItemDiv.remove();
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        const orderItems = document.querySelectorAll('.order-item');
+
+        orderItems.forEach(item => {
+            const productSelect = item.querySelector('select[name="product_id"]');
+            const quantityInput = item.querySelector('input[name="quantity"]');
+
+            const price = parseFloat(productSelect.options[productSelect.selectedIndex].getAttribute('data-price'));
+            const quantity = parseInt(quantityInput.value);
+
+            if (!isNaN(price) && !isNaN(quantity)) {
+                totalPrice += price * quantity;
+            }
+        });
+
+        document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+    }
+</script>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>

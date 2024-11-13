@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение заказа</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'market/market.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>Ваш заказ успешно оформлен!</h1>
+</header>
+
+<nav class="nav-menu">
+    <a href="{% url 'profile:profile' %}">Профиль</a>
+    <a href="#">Категории</a>
+    <a href="#">Акции</a>
+    <a href="#">Заказы</a>
+    <a href="{% url 'market:view_cart' %}">Корзина</a>
+
+    <form action="{% url 'logout' %}" method="POST" class="auth-form">
+        {% csrf_token %}
+        <button type="submit" class="auth-button">
+            {% if user.is_authenticated %}
+                Logout
+            {% else %}
+                <a href="{% url 'buyers_login' %}?next={{ request.path }}">Login</a>
+            {% endif %}
+        </button>
+    </form>
+</nav>
+
+<main>
+    <section class="order-summary">
+        <p>Номер заказа: {{ order.id }}</p>
+        <p>Дата заказа: {{ order.created_at|date:"d.m.Y H:i" }}</p>
+        <p>Общая сумма: {{ order.price|floatformat:2 }} ₽</p>
+
+        <h3>Товары в заказе:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Количество</th>
+                    <th>Цена за единицу</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.order_items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price|floatformat:2 }} ₽</td>
+                        <td>{{ item.quantity|floatformat:2 }} x {{ item.product.price|floatformat:2 }} ₽</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <a href="{% url 'market:market' %}" class="btn">Назад в магазин</a>
+</main>
+
+</body>
+</html>

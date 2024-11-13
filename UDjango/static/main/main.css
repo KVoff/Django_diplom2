@@ -1,0 +1,74 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: rgba(129, 175, 221, 0.42);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.main-container {
+    flex: 0;  /* Дает возможность основной форме занять всё доступное пространство */
+    width: 60%;
+    max-width: 600px; /* Ограничьте максимальную ширину формы */
+    margin: 0 auto; /* Центрируйте форму */
+    padding: 20px;
+    background-color: #ffffff; /* Цвет фона формы */
+    border: 1px solid #dee2e6; /* Граница формы */
+    border-radius: 5px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+}
+
+
+.main-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+.main-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+
+/* Стили футера */
+footer {
+    display: flex;
+    flex-direction: column; /* Элементы внутри футера будут по вертикали */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background-color: transparent;
+    border-top: 1px solid #dee2e6;
+    margin-top: auto; /* Это заставит футер быть внизу */
+}
+
+footer p {
+    margin: 0; /* Убираем отступы вокруг абзаца */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+.main-button {
+
+    color: #4c9daf; /* Цвет текста */
+    background-color: transparent; /* Прозрачный фон */
+    padding: 10px 20px; /* Отступы */
+    text-decoration: none; /* Убирает подчеркивание */
+    border-radius: 5px; /* Скругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    /* border: 2px solid #007bff; /* Граница с цветом текста */
+}
+
+.main-button:hover {
+    color: #127a8c; /* Цвет текста при наведении */
+    background-color: transparent; /* Фон остается прозрачным */
+    /* border-color: #0056b3; /* Граница также меняется при наведении */
+}
+
+.align-right {
+    text-align: right; /* Выровнять текст по правому краю */
+    display: block; /* Чтобы ссылка занимала всю строку */
+    margin-bottom: 0; /* Убирает или уменьшает отступ снизу для каждого элемента */
+}

@@ -1,0 +1,125 @@
+/* Обнуляем отступы и устанавливаем flex-контейнер на всю высоту */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: rgba(129, 175, 221, 0.42); /* Легкий фон */
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+}
+
+.auth-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Убедитесь, что элемент будет выше других */
+}
+
+.auth-container .auth-button {
+    background-color: #4c9daf; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Закругленные углы у кнопки */
+    cursor: pointer; /* Указатель для курсора */
+}
+
+
+.auth-container .auth-button:hover {
+    background-color: #127a8c; /* Цвет кнопки при наведении */
+}
+
+/* Контейнер, который ограничивает ширину и высоту */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Занимает всю высоту страницы */
+    width: 100%; /* Занимает всю ширину страницы */
+}
+
+/* Контейнер профиля, который будет фиксированного размера */
+.profile-container {
+    width: 90vw; /* 90% от ширины экрана */
+    height: 90vh; /* 90% от высоты экрана */
+    max-width: 800px; /* Максимальная ширина */
+    max-height: 800px; /* Максимальная высота */
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Убираем прокрутку, так как элементы будут статичными */
+    display: grid; /* Используем grid-сетку */
+    grid-template-columns: repeat(3, 1fr); /* 3 столбца одинаковой ширины */
+    grid-template-rows: repeat(3, 1fr); /* 3 строки одинаковой высоты */
+    grid-gap: 10px; /* Зазор между элементами */
+}
+
+/* Визуализация границы для теста */
+.profile-container {
+    border: 2px solid #ccc; /* Серый контур для теста */
+}
+
+/* Элементы внутри сетки */
+.profile-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    background-color: #4c9daf; /* Цвет фона по умолчанию */
+    color: white; /* Цвет текста */
+    border: 1px solid #ddd; /* Граница для квадратов */
+    border-radius: 5px; /* Закругленные углы */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавные переходы */
+}
+
+/* Эффект наведения */
+.profile-container a:hover {
+    background-color: #127a8c; /* Цвет фона при наведении */
+    transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Дополнительный стиль для текста в квадратах */
+.profile-container a span {
+    font-weight: bold;
+}
+
+/* Убираем отступы у h2 и p */
+h2 {
+    margin: 0; /* Убирает все отступы сверху и снизу для h2 и p */
+}
+
+p {
+    margin-top: 3px;
+}
+
+
+
+/* Стили для всех квадратов с классом .draggable */
+.draggable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Обрезает части изображения за пределами квадрата */
+}
+
+/* Стили для всех изображений внутри квадратов */
+.draggable .image {
+    width: 100%;
+    height: 100%;
+    max-width: 100%; /* Ограничение по ширине */
+    max-height: 100%; /* Ограничение по высоте */
+    object-fit: cover; /* Заполнение квадрата */
+    border-radius: inherit;
+}
+
+/* Стили для анимации */
+.draggable .animation {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполнение квадратного пространства */
+    border-radius: inherit;
+}
+

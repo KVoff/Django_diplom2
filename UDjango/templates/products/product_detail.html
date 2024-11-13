@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'product/product.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+<body>
+<div class="form-container">
+    <h1>{{ product.name }}</h1>
+
+    <table class="product-table">
+        <tr>
+            <td class="label">Описание:</td>
+            <td>{{ product.description }}</td>
+        </tr>
+        <tr>
+            <td class="label">Цена:</td>
+            <td>{{ product.price }} руб.</td>
+        </tr>
+        <tr>
+            <td class="label">Наличие:</td>
+            <td>{{ product.count }}</td>
+        </tr>
+        <tr>
+            <td class="label">Фото:</td>
+            <td>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                         class="product-image">
+                {% else %}
+                    <img src="{% static 'market/img/default.png' %}"
+                     alt="Изображение отсутствует">
+                {% endif %}
+            </td>
+        </tr>
+
+    </table>
+
+    <div>
+        <form action="{% url 'products:product_update' product.id %}"
+              method="GET"
+              style="display:inline;">
+            <button type="submit" class="button">Редактировать товар</button>
+        </form>
+
+        <form action="{% url 'products:product_delete' product.id %}"
+              method="GET"
+              style="display:inline;">
+            <button type="submit" class="delete-button">Удалить товар
+            </button>
+        </form>
+
+        <p><a href="{% url 'products:product_list' %}"
+              class="back-button">Назад
+            к списку товаров</a></p>
+    </div>
+</div>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>

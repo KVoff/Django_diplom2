@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменение заказа #{{ order.id }}</title>
+    <link rel="stylesheet" href="{% static 'order/order.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+
+<body>
+
+<div class="form-container">
+
+    <h1>Изменение заказа #{{ order.id }}</h1>
+
+
+    <p><strong>Покупатель:</strong> {{ order.buyer }}</p>
+    <p><strong>Дата создания:</strong> {{ order.created_at }}</p>
+
+
+    <div class="order-price">
+        <label for="price">Общая стоимость:</label>
+        <input type="text" id="price" name="price" value="{{ order.price }}"
+               readonly>
+    </div>
+
+
+    <form method="POST" action="{% url 'order_update' order.id %}">
+        {% csrf_token %}
+
+
+        {% if form.non_field_errors %}
+            <div class="errorlist">
+                <p>Пожалуйста, исправьте следующие ошибки:</p>
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="errorlist">
+                    <strong>{{ field.label }}:</strong>
+                    <ul>
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <h3>Адрес доставки</h3>
+        {% if order.delivery_address %}
+            <p><strong>Текущий
+                адрес:</strong> {{ order.delivery_address.street }}, {{ order.delivery_address.house_number }}
+            </p>
+        {% else %}
+            <p>Текущий адрес не указан</p>
+        {% endif %}
+
+
+        <div>
+            <label for="address_select">Выберите адрес:</label>
+            <select id="address_select" name="delivery_address">
+                <option value="">-- Выберите адрес --</option>
+                {% for address in buyer_addresses %}
+                    <option value="{{ address.id }}"
+                            {% if order.delivery_address and order.delivery_address.id == address.id %}selected{% endif %}>
+                        {{ address.street }}, {{ address.house_number }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <h3>Или добавьте новый адрес</h3>
+        <div class="new-address">
+            <label for="new_street">Улица:</label>
+            <input type="text" id="new_street" name="new_street"
+                   maxlength="255"
+                   placeholder="Улица"
+                   value="{{ form.new_street.value|default:'' }}">
+
+            <label for="new_house_number">Номер дома:</label>
+            <input type="text" id="new_house_number" name="new_house_number"
+                   maxlength="50" placeholder="Номер дома"
+                   value="{{ form.new_house_number.value|default:'' }}">
+        </div>
+
+
+        <div>
+
+            <button type="submit" class="button">Сохранить изменения
+            </button>
+            <form action="{% url 'order_detail' order.id %}" method="GET"
+                  style="display:inline;">
+                <button type="submit" class="button">Отмена
+                </button>
+            </form>
+
+
+        </div>
+    </form>
+
+</div>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>
+

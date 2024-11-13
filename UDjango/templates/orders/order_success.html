@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="{% static 'order/order.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+<body>
+<div class="form-container">
+    <h1>Заказ создан!</h1>
+
+    <p><strong>Номер заказа:</strong> {{ order.id }}</p>
+    <p><strong>Время создания:</strong>
+        {{ order.created_at|date:"Y-m-d H:i" }}</p>
+    <p><strong>Покупатель:</strong> {{ order.buyer }}</p>
+    <p><strong>Общая стоимость:</strong> {{ order.price }} руб.</p>
+
+    <a href="{% url 'order_list' %}" class="back-button">К списку заказов</a>
+</div>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>

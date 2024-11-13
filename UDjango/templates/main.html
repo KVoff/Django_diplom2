@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main page</title>
+    <link rel="stylesheet" href="{% static 'main/main.css' %}">
+</head>
+<body>
+<div class="main-container">
+    <h1>Приветствую!</h1>
+    <p>Вы можете использовать ссылки для перехода</p>
+
+    <a href="{% url 'buyers:buyer_list' %}" class="main-button">Покупатели</a>
+    <a href="{% url 'products:product_list' %}" class="main-button">Товары</a>
+    <a href="{% url 'order_list' %}" class="main-button">Заказы</a>
+    <a href="{% url 'profile:profile' %}" class="main-button">Профиль</a>
+    <a href="{% url 'admin:index' %}" class="main-button">Админка</a>
+    <p><a href="{% url 'register' %}" class="main-button">Register</a></p>
+    <p><a href="{% url 'market:market' %}" class="main-button">Магазин</a></p>
+    <br><br><br>
+
+    <p class="align-right">Вы всегда можете вернуться сюда используя</p>
+    <a href="{% url 'main' %}" class="align-right main-button">back to main page</a>
+
+</div>
+{#<footer>#}
+{#    <a href="{% url 'main' %}" class="main-button">back to main page</a>#}
+{#    <p>Django 2024</p>#}
+{#</footer>#}
+</body>
+</html>

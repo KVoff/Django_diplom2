@@ -1,0 +1,17 @@
+<!-- buyers/login.html -->
+
+<h2>Вход для покупателей</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+</form>
+
+<!-- поле для ошибок -->
+{#{% if form.non_field_errors %}#}
+{#    <div class="error">#}
+{#        {{ form.non_field_errors }}#}
+{#    </div>#}
+{#{% endif %}#}
+
+

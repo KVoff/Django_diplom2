@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="{% static 'order/order.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+<body>
+<div class="order-container">
+    <h1>Заказ #{{ order.id }}</h1>
+    <p>Дата создания: {{ order.created_at }}</p>
+    <p>Покупатель: <strong> {{ order.buyer }} </strong></p>
+    <p>Общая стоимость: <strong> {{ order.price }} руб.</strong></p>
+
+    <h3>Адрес доставки</h3>
+    {% if order.delivery_address %}
+        <p><strong>Адрес доставки:</strong> {{ order.delivery_address.street }}, {{ order.delivery_address.house_number }}
+        </p>
+    {% else %}
+        <p><strong>Адрес доставки:</strong> Адрес доставки не указан</p>
+    {% endif %}
+
+    <h2>Товары в заказе</h2>
+    <table class="order-table">
+        <thead>
+        <tr>
+            <th>Название товара</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in order.order_items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">Нет товаров в этом заказе.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <form action="{% url 'order_update' order.id %}" method="GET"
+              style="display:inline;">
+            <button type="submit" class="button">Изменить заказ</button>
+        </form>
+
+        <form action="{% url 'order_delete' order.id %}" method="GET"
+              style="display:inline;">
+            <button type="submit" class="delete-button">Удалить заказ</button>
+        </form>
+
+    </div>
+
+    <a href="{% url 'order_list' %}" class="back-button">Назад к списку
+        заказов</a>
+</div>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>
+

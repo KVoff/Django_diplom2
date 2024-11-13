@@ -1,0 +1,235 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.auth-container {
+    margin-left: 20px; /* Добавляем немного отступа слева для текста приветствия */
+    font-size: 16px;
+    color: white;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #444;
+    padding: 10px 0;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.nav-menu a:hover {
+    background-color: #555;
+}
+
+
+.nav-menu form {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto; /* Это прижмет форму с кнопкой к правому краю */
+}
+
+.nav-menu button.auth-button {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.nav-menu button.auth-button:hover {
+    background-color: #555;
+}
+
+.nav-menu input[type="text"],
+.nav-menu input[type="password"],
+.nav-menu input[type="submit"] {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item-link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    width: 200px; /* Задайте нужную ширину */
+}
+
+.product-item img {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.product-info {
+    margin-top: 10px;
+}
+
+.product-item-link:hover .product-item {
+    transform: scale(1.05); /* Увеличение на 5% при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень для эффекта */
+}
+
+.product-item .product-info {
+    padding: 10px;
+}
+
+.product-item .product-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-item .product-price {
+    color: #e74c3c;
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.product-item .product-count {
+    font-size: 12px;
+    color: #777;
+}
+
+.product-item .buy-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #2ecc71;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.product-item .buy-button:hover {
+    background-color: #27ae60;
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #2ecc71;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    width: 90%; /* Сделать кнопку по ширине карточки */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #27ae60;
+}
+
+/* Скрываем контроллер количества товара по умолчанию */
+.quantity-controller {
+    display: none;
+    margin-top: 10px;
+    gap: 10px;
+    align-items: center;
+}
+
+.quantity-controller button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 35px;
+    height: 35px;
+}
+
+.quantity-controller input {
+    width: 40px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Скрываем кнопку "Купить" и показываем контроллер количества товара при выборе радиокнопки */
+.toggle:checked + .buy-button {
+    display: none;
+}
+
+.toggle:checked ~ .quantity-controller {
+    display: flex;
+}
+
+
+/* Стили для таблицы */
+table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 20px auto; /* Это выровняет таблицу по центру */
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Добавлены вертикальные и горизонтальные линии */
+}
+
+th {
+    background-color: #777;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Общие отступы и оформление */
+p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}

@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if buyer %}Update Buyer{% else %}Create Buyer{% endif %}</title>
+    <link rel="stylesheet" href="{% static 'buyer/buyer.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+
+</head>
+
+<body>
+
+
+<div class="form-container">
+    <h1>{% if buyer %}Редактировать{% else %}Создать{% endif %}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+
+        <!-- Телефон и Почта в одном ряду -->
+        <div class="two-fields">
+            <div>
+                <label for="id_phone_number">Телефон:</label>
+                {{ form.phone_number }}
+                {% if form.phone_number.errors %}
+                    <div class="error">{{ form.phone_number.errors }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="id_first_name">Имя:</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <div class="error">{{ form.first_name.errors }}</div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="two-fields">
+            <div>
+                <label for="id_password">Пароль:</label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="error">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_password_confirmation">Подтвердите
+                    пароль:</label>
+                {{ form.password_confirmation }}
+                {% if form.password_confirmation.errors %}
+                    <div class="error">{{ form.password_confirmation.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% if not buyer %}
+            <button type="submit">Зарегистрировать</button>
+        {% endif %}
+
+        <!-- Имя и Фамилия в одном ряду -->
+        <div class="two-fields">
+
+
+            <div>
+                <label for="id_last_name">Фамилия:</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <div class="error">{{ form.last_name.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- Дата рождения на отдельной строке -->
+        <div class="two-fields">
+            <div>
+                <label for="id_email">Почта:</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="id_date_of_birth">Дата рождения:</label>
+                {{ form.date_of_birth }}
+                {% if form.date_of_birth.errors %}
+                    <div class="error">{{ form.date_of_birth.errors }}</div>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+        <!-- Заметки на всю ширину -->
+        <div class="full-width">
+            <label for="id_special_notes">Заметки:</label>
+            {{ form.special_notes }}
+            {% if form.special_notes.errors %}
+                <div class="error">{{ form.special_notes.errors }}</div>
+            {% endif %}
+        </div>
+
+
+        <!-- Адреса -->
+        {% if buyer %}
+        <div class="full-width readonly">
+            <label for="id_addresses">Адреса:</label>
+            {{ form.addresses }}
+            {% if form.addresses.errors %}
+                <div class="error">{{ form.addresses.errors }}</div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Поля для нового адреса (улица и номер дома) -->
+        <div class="two-fields">
+            <div>
+                <label for="id_street">Улица:</label>
+                {{ form.street }}
+                {% if form.street.errors %}
+                    <div class="error">{{ form.street.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="id_house_number">Номер дома:</label>
+                {{ form.house_number }}
+                {% if form.house_number.errors %}
+                    <div class="error">{{ form.house_number.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <a href="{% url 'buyers:buyer_list' %}" class="back-button">К списку
+        покупателей</a>
+</div>
+
+
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+
+</body>
+</html>

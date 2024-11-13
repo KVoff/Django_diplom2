@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'market/market.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+<body>
+<header>
+    <h1>Корзина</h1>
+</header>
+
+<!-- Блок для отображения сообщений -->
+{% if messages %}
+    <div class="messages">
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<nav class="nav-menu">
+    <a href={% url 'profile:profile' %}>Профиль</a>
+    <a href="#">Категории</a>
+    <a href="#">Акции</a>
+    <a href="#">Заказы</a>
+    <a href="{% url 'market:view_cart' %}">Корзина</a>
+
+    <form action="{% url 'logout' %}" method="POST" class="auth-form">
+        {% csrf_token %}
+        <button type="submit" class="auth-button">
+            {% if user.is_authenticated %}
+                Logout
+            {% else %}
+                <a href="{% url 'buyers_login' %}?next={{ request.path }}">Login</a>
+            {% endif %}
+        </button>
+    </form>
+</nav>
+
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Сумма</th>
+            <th>Действия</th>  <!-- Добавлена колонка для действий -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for entry in cart_data %}
+            <tr>
+                <td>{{ entry.item.product.name }}</td>
+                <td>{{ entry.item.quantity }}</td>
+                <td>{{ entry.item.product.price|floatformat:2 }} ₽</td>
+                <td>{{ entry.price|floatformat:2 }} ₽</td>
+                <td>
+                    <!-- Кнопки для обновления количества и удаления товара из корзины -->
+                    <form action="{% url 'market:update_cart' entry.item.product.id 'increase' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">+</button>
+                    </form>
+                    <form action="{% url 'market:update_cart' entry.item.product.id 'decrease' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">-</button>
+                    </form>
+                    <form action="{% url 'market:remove_from_cart' entry.item.product.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="return confirm('Вы уверены, что хотите удалить этот товар?')">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Итого: {{ total_price }} ₽</p>
+    <form action="{% url 'market:checkout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn">Оформить заказ</button>
+    </form>
+
+    <a href="{% url 'market:market' %}" class="btn">Назад в магазин</a>
+</main>
+
+</body>
+</html>

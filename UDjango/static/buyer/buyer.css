@@ -1,0 +1,202 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: rgba(129, 175, 221, 0.42);
+    display: flex;
+    flex-direction: column;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+.main-content {
+    flex-grow: 1;
+    padding-bottom: 60px; /* Отступ для футера, чтобы он не перекрывался */
+    overflow: auto; /* Добавим прокрутку в случае переполнения */
+}
+
+/* Контейнер формы */
+.form-container {
+    flex: 1; /* Дает возможность основной форме занять всё доступное пространство */
+    max-width: 1000px; /* Ограничьте максимальную ширину формы */
+    margin: 0 auto; /* Центрируйте форму */
+    padding: 20px;
+    background-color: #ffffff; /* Цвет фона формы */
+    border: 1px solid #dee2e6; /* Граница формы */
+    border-radius: 5px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+}
+
+/* Основной стиль для формы */
+form {
+    display: grid;
+    gap: 20px;
+}
+
+/* Поля формы, расположенные в одном ряду */
+.two-fields {
+    display: flex;
+    gap: 20px;
+    grid-column: span 2;
+}
+
+.two-fields > div {
+    flex: 1;
+}
+
+/* Поля, которые занимают всю ширину */
+.full-width {
+    grid-column: span 2;
+}
+
+div {
+    margin-bottom: 1px; /* Отступ снизу для блоков */
+}
+
+
+h1, h3 {
+    text-align: center; /* Центрируйте заголовок */
+    color: #343a40; /* Цвет заголовка */
+}
+
+label {
+    font-weight: bold; /* Сделайте метки жирными */
+    margin-top: 10px; /* Отступ сверху для меток */
+}
+
+
+input, textarea, select {
+    height: auto; /* Устанавливаем высоту авто, чтобы она зависела от содержимого */
+    max-height: 100px; /* Ограничиваем максимальную высоту */
+    overflow-y: auto; /* Добавляем прокрутку, если контент выходит за пределы */
+
+    width: 100%; /* Ширина полей на 100% */
+    padding: 10px; /* Отступы внутри полей */
+    border: 1px solid #ced4da; /* Цвет границы */
+    border-radius: 4px; /* Закругленные углы у полей */
+    box-sizing: border-box; /* Учет отступов и границ в ширине */
+}
+
+.create-buyer-button {
+    /*font-size: 1.2em;*/
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    background-color: #4c9daf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.create-buyer-button:hover {
+    background-color: #127a8c;
+}
+
+
+button {
+    background-color: #4c9daf; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Закругленные углы у кнопки */
+    cursor: pointer; /* Указатель для курсора */
+}
+
+button:hover {
+    background-color: #127a8c; /* Цвет кнопки при наведении */
+}
+
+.back-button {
+    display: inline-block; /* Отображение как блочный элемент */
+    margin-top: 20px; /* Отступ сверху для кнопки возврата */
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #4c9daf; /* Цвет текста #e74c3c */
+}
+
+.back-button:hover {
+    color: #127a8c;
+}
+
+.delete-button {
+    background-color: #e74c3c; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Закругленные углы у кнопки */
+    cursor: pointer; /* Указатель для курсора */
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.cancel-button {
+    background-color: #dcd362; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Закругленные углы у кнопки */
+    cursor: pointer; /* Указатель для курсора */
+}
+
+.cancel-button:hover {
+    background-color: #ddb730;
+}
+
+
+/* Ошибки */
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.detail-table {
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-table td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+.detail-table .label {
+    font-weight: bold;
+    text-align: right;
+    width: 30%;
+    color: #555;
+}
+
+.special-notes {
+    max-width: 300px; /* Установите нужную максимальную ширину */
+    white-space: normal; /* Позволяет тексту переноситься на новую строку */
+    word-wrap: break-word; /* Разрывает длинные слова, чтобы они вписывались в ширину */
+}
+
+
+.delete-container {
+    display: flex;
+    justify-content: space-between; /* Размещает кнопки по разным сторонам */
+    align-items: center;  /* Выравнивание по вертикали */
+}
+
+.align-right {
+    margin-left: auto; /* Перемещает кнопку вправо */
+    /*margin-right: 0;  !* Убирает отступ справа *!*/
+    /*margin-bottom: 0;*/
+}
+
+.readonly {
+    pointer-events: none;
+    background-color: #f0f0f0;  /* Можно изменить на другой цвет */
+}

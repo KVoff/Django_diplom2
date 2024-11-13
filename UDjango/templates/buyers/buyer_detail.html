@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Detail</title>
+    <link rel="stylesheet" href="{% static 'buyer/buyer.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+
+
+<body>
+<div class="form-container">
+    <h1>{{ buyer.first_name }} {{ buyer.last_name }}</h1>
+
+    <table class="detail-table">
+        <tr>
+            <td class="label">Дата рождения:</td>
+            <td>{{ buyer.date_of_birth }}</td>
+        </tr>
+        <tr>
+
+            <td class="label">Заметки:</td>
+            <td class="special-notes">{{ buyer.special_notes }}</td>
+        </tr>
+        <tr>
+            <td class="label">Телефон:</td>
+            <td>{{ buyer.phone_number }}</td>
+        </tr>
+        <tr>
+            <td class="label">Почта:</td>
+            <td>{{ buyer.email }}</td>
+        </tr>
+        <tr>
+            <td class="label">Адреса:</td>
+            <td>
+
+                {% for address in buyer.addresses.all %}
+                    <p>{{ address.street }}, {{ address.house_number }}</p>
+                {% empty %}
+                    <p>No addresses available.</p>
+                {% endfor %}
+
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <form action="{% url 'buyers:buyer_update' buyer.id %}"
+              method="GET"
+              style="display:inline;">
+            <button type="submit" class="button">Редактировать</button>
+        </form>
+        <form action="{% url 'buyers:buyer_delete' buyer.id %}"
+              method="GET"
+              style="display:inline;">
+            <button type="submit" class="delete-button">Удалить</button>
+        </form>
+
+
+    </div>
+    <a href="{% url 'buyers:buyer_list' %}" class="back-button">К списку
+        покупателей</a>
+</div>
+
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>
+
+

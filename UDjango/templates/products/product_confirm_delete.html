@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Deletion</title>
+    <link rel="stylesheet" href="{% static 'product/product.css' %}">
+    <link rel="stylesheet" href="{% static 'other/other.css' %}">
+</head>
+<body>
+<div class="form-container">
+    <h1>Подтверждение удаления</h1>
+    <h3>Вы уверены, что хотите удалить товар: {{ product.name }}?</h3>
+    <br>
+
+    <div class="delete-container">
+
+        <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="delete-button">Удалить</button>
+        </form>
+
+        <form action="{% url 'products:product_list' %}" method="GET"
+              style="display:inline;">
+            <button type="submit" class="cancel-button align-right">Отмена
+            </button>
+        </form>
+    </div>
+</div>
+<footer>
+    <a href="{% url 'main' %}" class="footer-button">back to main page</a>
+    <p>Django 2024</p>
+</footer>
+</body>
+</html>

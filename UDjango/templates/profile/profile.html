@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="{% static 'profile/profile.css' %}">
+</head>
+<body>
+<div class="auth-container">
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="auth-button" type="submit">Logout</button>
+        </form>
+    {% else %}
+        <form action="{% url 'buyers_login' %}">
+            <button class="auth-button" type="submit">Login</button>
+        </form>
+    {% endif %}
+</div>
+<div class="container">
+    <div class="profile-container" id="profile-container">
+        <a href="#" class="draggable" draggable="true" id="square-1">
+            <div>
+                <img src="{% static 'profile/img/logo_empty.jpg' %}" alt="logo"
+                     class="image">
+            </div>
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-2">
+            <div>
+                <h2>Привет!</h2>
+                <p><strong>{{ buyer.first_name }}</strong></p>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'buyers_login' %}">
+                        <button type="submit">Войти</button>
+                    </form>
+                {% endif %}
+            </div>
+
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-3">
+            <div>
+                <img src="{% static 'profile/img/cart.png' %}" alt="logo"
+                     class="image">
+            </div>
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-4">
+            <span>баланс</span>
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-5">
+            <div>
+                <img src="{% static 'profile/img/sale.png' %}" alt="logo"
+                     class="image">
+            </div>
+        </a>
+        <a href="{% url 'market:market' %}" class="draggable" draggable="true"
+           id="square-6">
+            <span>магазин</span>
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-7">
+            <div>
+                <img src="{% static 'profile/img/orders.png' %}" alt="logo"
+                     class="image">
+            </div>
+        </a>
+        <a href="{% url 'main' %}" class="draggable" draggable="true"
+           id="square-8">
+            <span>8</span>
+        </a>
+        <a href="#" class="draggable" draggable="true" id="square-9">
+            <div>
+                <img src="{% static 'profile/img/log.gif' %}" alt="logo"
+                     class="animation">
+            </div>
+        </a>
+    </div>
+</div>
+
+<script src="{% static 'profile/profile.js' %}"></script>
+</body>
+</html>
+
+
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="ru">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Профиль пользователя</title>#}
+{#    <link rel="stylesheet" href="{% static 'profile/profile.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#    <div class="container">#}
+{#        <div class="profile-container">#}
+{#            <a href="#">#}
+{#                <span>1</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>2</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>3</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>4</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>5</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>6</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>7</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>8</span>#}
+{#            </a>#}
+{#            <a href="#">#}
+{#                <span>9</span>#}
+{#            </a>#}
+{#        </div>#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
