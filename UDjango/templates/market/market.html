@@ -39,7 +39,7 @@
 <div class="product-list">
     {% for product in products %}
         <div class="product-container">
-            <a href="{% url 'products:product_detail' product.id %}"
+            <a href="{% url 'market:detail' product.id %}"
                class="product-item-link">
                 <div class="product-item">
                     {% if product.image %}
